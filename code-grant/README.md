@@ -1,4 +1,4 @@
-Authorization Code Grant: 授权码模式
+授权码模式: Authorization Code Grant
 ---
 
 授权码模式（authorization code）是功能最完整、流程最严密的授权模式。它的特点就是通过客户端的后台服务器，与"服务提供商"的认证服务器进行互动。
@@ -7,11 +7,10 @@ Authorization Code Grant: 授权码模式
 
 它的步骤如下：
 > （A）用户访问客户端，后者将前者导向认证服务器。
-（B）用户选择是否给予客户端授权。
-（C）假设用户给予授权，认证服务器将用户导向客户端事先指定的"重定向URI"（redirection URI），同时附上一个授权码。
-（D）客户端收到授权码，附上早先的"重定向URI"，向认证服务器申请令牌。这一步是在客户端的后台的服务器上完成的，对用户不可见。
-（E）认证服务器核对了授权码和重定向URI，确认无误后，向客户端发送访问令牌（access token）和更新令牌（refresh token）。
-
+> （B）用户选择是否给予客户端授权。
+> （C）假设用户给予授权，认证服务器将用户导向客户端事先指定的"重定向URI"（redirection URI），同时附上一个授权码。
+> （D）客户端收到授权码，附上早先的"重定向URI"，向认证服务器申请令牌。这一步是在客户端的后台的服务器上完成的，对用户不可见。
+> （E）认证服务器核对了授权码和重定向URI，确认无误后，向客户端发送访问令牌（access token）和更新令牌（refresh token）。
 
 下面是上面这些步骤所需要的参数。
 
@@ -63,23 +62,23 @@ E步骤中，认证服务器发送的HTTP回复，包含以下参数：
 
 下面是一个例子。
 ```
-  	 HTTP/1.1 200 OK
-     Content-Type: application/json;charset=UTF-8
-     Cache-Control: no-store
-     Pragma: no-cache
+	HTTP/1.1 200 OK
+    Content-Type: application/json;charset=UTF-8
+    Cache-Control: no-store
+    Pragma: no-cache
 
-     {
-       "access_token":"2YotnFZFEjr1zCsicMWpAA",
+	{
+		"access_token":"2YotnFZFEjr1zCsicMWpAA",
        "token_type":"example",
        "expires_in":3600,
        "refresh_token":"tGzv3JOkF0XG5Qx2TlKWIA",
        "example_parameter":"example_value"
-     }
+	}
 ```
 
 # 实际应用
 
-1. 启动项目，在浏览器输入下面链接：
+**1. 启动项目，在浏览器输入下面链接：**
 ```
 http://localhost:8080/oauth/authorize?response_type=code&client_id=clientapp&state=xyz&redirect_uri=http://m.client.com/callback
 ```
@@ -91,7 +90,7 @@ http://m.client.com/callback?code=bm0OA8&state=xyz
 
 获取到授权码后code后需在10s内进行如下操作，一个code只能使用一次。
 
-2. 获取access_token
+**2. 获取access_token**
 
 `POST`请求：
 ```
@@ -108,6 +107,7 @@ Username | clientapp | 放在Authorization, 客户端的用户名
 Password | 123456 | 放在Authorization, 客户端的密码
 
 `Parameters`:
+
 参数名称 | 参数值 | 参数说明
 ---|--- |--- 
 grant_type | authorization_code | 授权类型
