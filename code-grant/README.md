@@ -6,11 +6,11 @@
 ![](../static/code_grant.png)
 
 它的步骤如下：
-> （A）用户访问客户端，后者将前者导向认证服务器。
-> （B）用户选择是否给予客户端授权。
-> （C）假设用户给予授权，认证服务器将用户导向客户端事先指定的"重定向URI"（redirection URI），同时附上一个授权码。
-> （D）客户端收到授权码，附上早先的"重定向URI"，向认证服务器申请令牌。这一步是在客户端的后台的服务器上完成的，对用户不可见。
-> （E）认证服务器核对了授权码和重定向URI，确认无误后，向客户端发送访问令牌（access token）和更新令牌（refresh token）。
+> * （A）用户访问客户端，后者将前者导向认证服务器。
+> * （B）用户选择是否给予客户端授权。
+> * （C）假设用户给予授权，认证服务器将用户导向客户端事先指定的"重定向URI"（redirection URI），同时附上一个授权码。
+> * （D）客户端收到授权码，附上早先的"重定向URI"，向认证服务器申请令牌。这一步是在客户端的后台的服务器上完成的，对用户不可见。
+> * （E）认证服务器核对了授权码和重定向URI，确认无误后，向客户端发送访问令牌（access token）和更新令牌（refresh token）。
 
 下面是上面这些步骤所需要的参数。
 
@@ -124,4 +124,24 @@ redirect_uri | http://m.client.com/callback | 重定向的url
     "expires_in": 2591999,
     "scope": "admin"
 }
+```
+
+**3. 使用access_token获取数据**
+`GET`请求：`http://localhost:8080/api/users?access_token=6833fa31-d39f-4f4e-bc85-adb86668c20c`
+结果：
+```
+[
+    {
+        "name": "adolfo",
+        "email": "adolfo@mailinator.com"
+    },
+    {
+        "name": "demigreite",
+        "email": "demigreite@mailinator.com"
+    },
+    {
+        "name": "jujuba",
+        "email": "jujuba@mailinator.com"
+    }
+]
 ```

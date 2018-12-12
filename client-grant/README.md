@@ -6,11 +6,11 @@
 ![](../static/client_grant.png)
 
 它的步骤如下：
-> A）客户端向认证服务器进行身份认证，并要求一个访问令牌。
-（B）认证服务器确认无误后，向客户端提供访问令牌。
+> * （A）客户端向认证服务器进行身份认证，并要求一个访问令牌。
+> * （B）认证服务器确认无误后，向客户端提供访问令牌。
 
 A步骤中，客户端发出的HTTP请求，包含以下参数：
-* granttype：表示授权类型，此处的值固定为"clientcredentials"，必选项。
+* granttype：表示授权类型，此处的值固定为"client_credentials"，必选项。
 * scope：表示权限范围，可选项。
 ```
      POST /token HTTP/1.1
@@ -18,7 +18,7 @@ A步骤中，客户端发出的HTTP请求，包含以下参数：
      Authorization: Basic czZCaGRSa3F0MzpnWDFmQmF0M2JW
      Content-Type: application/x-www-form-urlencoded
 
-     grant_type=client_credentials
+    grant_type=client_credentials
 ```     
 
 认证服务器必须以某种方式，验证客户端身份。
@@ -39,43 +39,55 @@ B步骤中，认证服务器向客户端发送访问令牌，下面是一个例�
 ```
 
 
+# 实际应用
 
+**1. 获取access_token**
 
+`POST`请求：`http://localhost:8080/oauth/token`
 
+`Content-Type: application/x-www-form-urlencoded`
 
+`Authorization`:
 
+参数名称 | 参数值 | 参数说明
+---|--- |--- 
+Username | clientadmin | 放在Authorization, 客户端的用户名
+Password | 123456 | 放在Authorization, 客户端的密码
 
-
-
-post请求：
-
-http://localhost:8080/oauth/token
+`Parameters`:
 
 参数名称 | 参数值 | 参数说明
 ---|--- |--- 
 grant_type | client_credentials | 授权类型
-Username | clientadmin | 放在Authorization,客户端的用户名
-Password | 123 | 放在Authorization,客户端的密码
+
+
+返回示例：
 ```
-响应如下：
 {
-    "access_token": "0b18b42c-19d3-4689-9154-193b26433280",
+    "access_token": "7c374bd5-b1fd-45c1-b327-213c95d572ef",
     "token_type": "bearer",
-    "expires_in": 2591992,
-    "scope": "select"
+    "expires_in": 2591999,
+    "scope": "admin"
 }
 ```
----
 
-说明：客户端模式只需要知道客户端的用户名和密码便能获取到正确的access_token，安全性较低，是四种模式中最简单的一种。
+**2. 使用access_token获取数据**
+`GET`请求：`http://localhost:8080/api/users?access_token=6833fa31-d39f-4f4e-bc85-adb86668c20c`
+结果：
+```
+[
+    {
+        "name": "adolfo",
+        "email": "adolfo@mailinator.com"
+    },
+    {
+        "name": "demigreite",
+        "email": "demigreite@mailinator.com"
+    },
+    {
+        "name": "jujuba",
+        "email": "jujuba@mailinator.com"
+    }
+]
+```
 
-客户端模式虽然不需要用户的用户名和密码，但依然需要配置一个用户的用户名和密码，配置在application.properties中。
-
-客户端模式可以配置多个客户端，可在内存中配置客户端，也可在数据库中配置客户端，配置客户端的地方如下图所示：
-
-![image](./img/1.png)
-
-
-配置认证受保护的资源如图所示，/api/**下的资源需要access_token才能访问
-
-![image](./img/2.png)
