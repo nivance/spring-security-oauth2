@@ -1,0 +1,305 @@
+{
+	"variables": [],
+	"info": {
+		"name": "auth2.0",
+		"_postman_id": "437c927b-c874-bbd2-251d-b22210b52248",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "client-grant",
+			"description": "",
+			"item": [
+				{
+					"name": "token",
+					"request": {
+						"url": "http://localhost:8080/oauth/token",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Basic Y2xpZW50YWRtaW46MTIz",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "grant_type",
+									"value": "client_credentials",
+									"description": "",
+									"type": "text"
+								}
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "code-grant",
+			"description": "",
+			"item": [
+				{
+					"name": "token",
+					"request": {
+						"url": "http://localhost:8080/oauth/token",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "Basic Y2xpZW50YXBwOjEyMzQ1Ng==",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "grant_type",
+									"value": "authorization_code",
+									"description": "",
+									"type": "text"
+								},
+								{
+									"key": "code",
+									"value": "3qoWId",
+									"description": "",
+									"type": "text"
+								},
+								{
+									"key": "redirect_uri",
+									"value": "http://m.client.com/callback",
+									"description": "",
+									"type": "text"
+								},
+								{
+									"key": "client_id",
+									"value": "clientapp",
+									"description": "",
+									"type": "text"
+								}
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "authorize",
+					"request": {
+						"url": {
+							"raw": "http://localhost:8080/oauth/authorize?response_type=code&client_id=clientapp&state=xyz&redirect_uri=http://m.client.com/callback",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"oauth",
+								"authorize"
+							],
+							"query": [
+								{
+									"key": "response_type",
+									"value": "code",
+									"equals": true,
+									"description": ""
+								},
+								{
+									"key": "client_id",
+									"value": "clientapp",
+									"equals": true,
+									"description": ""
+								},
+								{
+									"key": "state",
+									"value": "xyz",
+									"equals": true,
+									"description": ""
+								},
+								{
+									"key": "redirect_uri",
+									"value": "http://m.client.com/callback",
+									"equals": true,
+									"description": ""
+								}
+							],
+							"variable": []
+						},
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "implicit-grant",
+			"description": "",
+			"item": [
+				{
+					"name": "authorize",
+					"request": {
+						"url": {
+							"raw": "http://localhost:8080/oauth/authorize?response_type=token&client_id=clientapp&redirect_uri=http://m.client.com/callback",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"oauth",
+								"authorize"
+							],
+							"query": [
+								{
+									"key": "response_type",
+									"value": "token",
+									"equals": true,
+									"description": ""
+								},
+								{
+									"key": "client_id",
+									"value": "clientapp",
+									"equals": true,
+									"description": ""
+								},
+								{
+									"key": "redirect_uri",
+									"value": "http://m.client.com/callback",
+									"equals": true,
+									"description": ""
+								}
+							],
+							"variable": []
+						},
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "password-grant",
+			"description": "",
+			"item": [
+				{
+					"name": "token",
+					"request": {
+						"url": "http://localhost:8080/oauth/token",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Basic Y2xpZW50YXBwOjEyMzQ1Ng==",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "grant_type",
+									"value": "password",
+									"description": "",
+									"type": "text"
+								},
+								{
+									"key": "username",
+									"value": "tom",
+									"description": "",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "123456",
+									"description": "",
+									"type": "text"
+								}
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "users",
+			"request": {
+				"url": {
+					"raw": "http://localhost:8080/api/users?access_token=529d3bd4-68c1-4d43-9229-d48bc75dc2e4",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"users"
+					],
+					"query": [
+						{
+							"key": "access_token",
+							"value": "529d3bd4-68c1-4d43-9229-d48bc75dc2e4",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "POST",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "profile",
+			"request": {
+				"url": {
+					"raw": "http://localhost:8080/api/profile?access_token=9a7a1612-bee3-49ea-b895-ae927f7745a2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"profile"
+					],
+					"query": [
+						{
+							"key": "access_token",
+							"value": "9a7a1612-bee3-49ea-b895-ae927f7745a2",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "POST",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}
