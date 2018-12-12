@@ -1,16 +1,14 @@
 package io.github.clientgrant.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.oauth2.provider.endpoint.AuthorizationEndpoint;
-import org.springframework.security.oauth2.provider.endpoint.FrameworkEndpointHandlerMapping;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import io.github.clientgrant.bean.UserProfile;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Controller
 @RequestMapping("/api")
@@ -25,7 +23,6 @@ public class AdminController {
         users.add(new UserProfile("adolfo", "adolfo@mailinator.com")); 
         users.add(new UserProfile("demigreite", "demigreite@mailinator.com")); 
         users.add(new UserProfile("jujuba", "jujuba@mailinator.com")); 
-        AuthorizationEndpoint authorizationEndpoint;
         return users; 
     }
 

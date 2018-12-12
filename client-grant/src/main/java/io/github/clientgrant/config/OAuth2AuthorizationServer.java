@@ -18,7 +18,7 @@ public class OAuth2AuthorizationServer extends AuthorizationServerConfigurerAdap
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
         clients.inMemory()
                 .withClient("clientadmin")
-                .secret(passwordEncoder.encode("123"))
+                .secret(passwordEncoder.encode("123456"))
                 .authorizedGrantTypes("client_credentials")
                 .accessTokenValiditySeconds(300)
                 .scopes("admin");
