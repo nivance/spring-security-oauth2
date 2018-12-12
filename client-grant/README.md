@@ -72,6 +72,7 @@ grant_type | client_credentials | 授权类型
 ```
 
 **2. 使用access_token获取数据**
+
 `GET`请求：`http://localhost:8080/api/users?access_token=6833fa31-d39f-4f4e-bc85-adb86668c20c`
 结果：
 ```
